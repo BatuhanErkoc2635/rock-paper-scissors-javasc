@@ -57,11 +57,19 @@ function displayWinner(winner){
 
 function playGame(){
     if(robotScore === 3 || humanScore === 3){
-        alert("GAME ENDED")
+        let winnerDecide
+        if (robotScore === 3 ){
+            winnerDecide = "ROBOT"
+        }
+        else if (humanScore === 3){
+            winnerDecide = "HUMAN "
+        }
+        alert("GAME ENDED " + winnerDecide + "WON! PLEASE REFRESH PAGE TO REPLAY")
 
     }
     else{
-
+        humanChoose()
+        robotChoose()
         if (humanChoice === "rock" && robotChoseText === "paper"){
             robotScore = robotScore + 1
             displayWinner("Robot won the round!")
@@ -104,8 +112,7 @@ function playGame(){
 buttons.forEach(button => {
     function buttonClicked (){
         humanChoice = button.id
-        humanChoose()
-        robotChoose()
+        
         playGame()
         console.log(robotChoseText)
         winnerDiv.appendChild(winnerText)
