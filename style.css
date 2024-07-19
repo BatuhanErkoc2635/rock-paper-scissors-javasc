@@ -1,0 +1,84 @@
+*{
+    background-color: #536493;
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+.heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    
+    
+}
+
+.choice-container{
+    background-color: #3a4665;
+    border-radius: 20px;
+    padding: 10px;
+    padding-right: 20px;
+}
+.choice-container p{
+    display: flex;
+    padding: 10px;
+    background-color: #EF5A6F;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+.big-container{
+    color: white;
+    margin-top: 40px;
+    display: flex;
+    background-color: #3a4665;
+    border-radius: 20px;
+  
+
+}
+.big-container .winnerDiv{
+    background-color: #3a4665;
+    border-radius: 20px;
+    padding: 10px;
+    padding-right: 20px;
+}
+.big-container .winnerDiv p{
+    display: flex;
+    padding: 10px;
+    background-color: #EF5A6F;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.scoresDiv{
+    background-color: #3a4665;
+}
+
+.winnerDiv{
+    margin-left: auto;   
+    
+}
+.button-container{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 10px;
+    
+}
+button{
+    margin: 10px;
+    background-color: #EF5A6F;
+    border-color: black;
+    border-radius: 20px;
+    border-width: 10px;
+    width: 200px;
+    height: 80px;
+    color: white;
+    font-weight: bold;
+
+}

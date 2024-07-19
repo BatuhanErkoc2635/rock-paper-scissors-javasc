@@ -1,113 +1,123 @@
-let computer_choice_number = 0
+const buttons = document.querySelectorAll("button")
+const bigContainer = document.querySelector(".big-container")
+const container = document.querySelector(".choice-container")
+const humanText = document.createElement("p")
+const robotText = document.createElement("p")
+const winnerDiv = document.createElement("div")
+const scoresDiv = document.createElement("div")
+winnerDiv.classList.add("winnerDiv")
+const winnerText = document.createElement("p")
+scoresDiv.classList.add ("scoresDiv")
+const showScoresText = document.createElement("p")
+const robotScoreText = document.createElement("p")
+const humanScoreText = document.createElement("p")
 
-let computer_choice_result = "none"
-let human_choice_result = "none"
+
+let robotScore = 0
 let humanScore = 0
-let computerScore = 0
+
+let robotChoseNumber = 0
+let robotChoseText = ""
+
+let humanChoice = ""
 
 
-
-function getHumanChoice(){
-    human_choice_result = String(prompt("Please write your answer: (rock,paper or scissor)"))
-    return human_choice_result
+function robotChoose(){
+    robotChoseNumber = Math.random()
+    if(robotChoseNumber <= 0.33){
+        robotChoseText = "rock"
+    }
+    else if (robotChoseNumber >= 0.33 && robotChoseNumber <= 0.66 ){
+        robotChoseText = "scissor"
+    }
+    else if (robotChoseNumber > 0.66){
+        robotChoseText = "paper"
+    }
+    robotText.textContent = "Robot choose: " + robotChoseText
+    bigContainer.appendChild(container)
+    container.append(robotText)
+}
+function humanChoose(){
+        
+    console.log(container)
+    humanText.textContent = "You choose: " + humanChoice
+    container.appendChild(humanText)
 }
 
+function displayWinner(winner){
+    winnerText.textContent = winner
+    showScoresText.textContent = "The scores"
+    humanScoreText.textContent = "Human score: " + humanScore
+    robotScoreText.textContent =" Robot score: " + robotScore
+   
+   
+    
 
-
-function getComputerChoice(){
-    computer_choice_number = Math.random()
-    if(computer_choice_number < 0.3){
-        computer_choice_result = "rock"
-    }
-    else if (computer_choice_number > 0.3 && computer_choice_number < 0.6)
-    {
-        computer_choice_result = "paper"
-    }
-    else if (computer_choice_number > 0.6 && computer_choice_number < 1)
-    {
-        computer_choice_result = "scissor"
-    }
-    return computer_choice_result
 }
 
-function displayScore(winner){
-    console.log("Human Choose:" + human_choice_result)
-    console.log("Computer Choose:" + computer_choice_result)
-    console.log(winner + " Got 1 points!")
-    console.log("Human:" +humanScore)
-    console.log("Computer:" + computerScore)
-}
+function playGame(){
+    if(robotScore === 3 || humanScore === 3){
+        alert("GAME ENDED")
 
-function playRound(){
-    if (humanScore === 3 || computerScore === 3){
-        console.log("Game Ended")
-        console.log("----------------")
-        console.log ("Final Scores:")
-        console.log("Human:" +humanScore)
-        console.log("Computer:" + computerScore)
     }
-    else
-    {
-        console.log("--------------------")
-        console.log("Starting new round!")
-        console.log("--------------------")
-        getHumanChoice()
-        getComputerChoice()
-        human_choice_result = human_choice_result.toLowerCase()
-        if (human_choice_result === "rock" && computer_choice_result === "paper" ){
-            computerScore = computerScore + 1
-            displayScore("Computer")
-            playRound()
+    else{
+
+        if (humanChoice === "rock" && robotChoseText === "paper"){
+            robotScore = robotScore + 1
+            displayWinner("Robot won the round!")
         }
-        else if (human_choice_result === "rock" && computer_choice_result ==="scissor"){
+        else if (humanChoice === "rock" && robotChoseText === "scissor"){
             humanScore = humanScore + 1
-            displayScore("Human")
-            playRound()
+            displayWinner("Human won the round!")
         }
-        else if (human_choice_result === "rock" && computer_choice_result ==="rock"){
-            console.log("Human Choose:" + human_choice_result)
-            console.log("Computer Choose:" + computer_choice_result)
-            console.log("It's draw!")
-            playRound()
+        else if (humanChoice === "rock" && robotChoseText === "rock"){
+            displayWinner("It's tie!")
         }
-        else if (human_choice_result === "paper" && computer_choice_result ==="scissor"){
-            computerScore = computerScore + 1
-            displayScore("Computer")
-            playRound()
-        }
-        else if (human_choice_result === "paper" && computer_choice_result ==="rock"){
+        else if (humanChoice === "paper" && robotChoseText === "rock"){
             humanScore = humanScore + 1
-            displayScore("Human")
-            playRound()
+            displayWinner("Human won the round!")
         }
-        else if (human_choice_result === "paper" && computer_choice_result ==="paper"){
-            console.log("Human Choose:" + human_choice_result)
-            console.log("Computer Choose:" + computer_choice_result)
-            console.log("It's draw!")
-            playRound()
+        else if (humanChoice === "paper" && robotChoseText === "scissor"){
+            robotScore = robotScore + 1
+            displayWinner("Robot won the round!")
         }
-        else if (human_choice_result === "scissor" && computer_choice_result ==="rock"){
-            computerScore = computerScore + 1
-            displayScore("Computer")
-            playRound()
+        else if (humanChoice === "paper" && robotChoseText === "paper"){
+            displayWinner("It's tie!")
         }
-        else if (human_choice_result === "scissor" && computer_choice_result ==="paper"){
+        else if (humanChoice === "scissor" && robotChoseText === "paper"){
             humanScore = humanScore + 1
-            displayScore("Human")
-            playRound()
+            displayWinner("Human won the round!")
         }
-        else if (human_choice_result === "scissor" && computer_choice_result ==="scissor"){
-            console.log("Human Choose:" + human_choice_result)
-            console.log("Computer Choose:" + computer_choice_result)
-            console.log("It's draw!")
-            playRound()
-        }    
+        else if (humanChoice === "scissor" && robotChoseText === "rock"){
+            robotScore = robotScore + 1
+            displayWinner("Robot won the round!")
+        }
+        else if (humanChoice === "scissor" && robotChoseText === "scissor"){
+            displayWinner("It's tie!")
+        }
+        
     }
+
 }
-playRound()
 
 
+buttons.forEach(button => {
+    function buttonClicked (){
+        humanChoice = button.id
+        humanChoose()
+        robotChoose()
+        playGame()
+        console.log(robotChoseText)
+        winnerDiv.appendChild(winnerText)
+        winnerDiv.appendChild(showScoresText)
+        scoresDiv.appendChild(humanScoreText)
+        scoresDiv.appendChild(robotScoreText)
+        winnerDiv.appendChild(scoresDiv)
+        bigContainer.appendChild(winnerDiv)
 
+        
+    }
 
-
-
+    button.addEventListener("click",buttonClicked)
+}
+)
